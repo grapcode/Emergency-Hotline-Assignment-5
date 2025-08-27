@@ -26,9 +26,9 @@ const copyBtn = getClass('copy-btn');
 
 for (let copy of copyBtn) {
   copy.addEventListener('click', function () {
-    let emNumber = copy.parentNode.parentNode.parentNode.children[3].innerText;
+    let emNumber = copy.parentNode.parentNode.children[3].innerText;
     navigator.clipboard.writeText(emNumber);
-    alert('Copied text: ' + emNumber);
+    alert('Copied number: ' + emNumber);
     // copy count update
     let copyCount = parseFloat(getId('copy-count').innerText);
     copyCount = copyCount + 1;
