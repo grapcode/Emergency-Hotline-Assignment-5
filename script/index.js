@@ -28,14 +28,41 @@ getId('card-box').addEventListener('click', function (e) {
     const cardName = callButton.parentNode.parentNode.children[1].innerText;
     const cardNumber = callButton.parentNode.parentNode.children[3].innerText;
     let coinIcon = parseFloat(getId('coin-icon').innerText);
-    coinIcon = coinIcon - 20;
-    getId('coin-icon').innerText = coinIcon;
-    if (coinIcon > 20) {
+
+    if (coinIcon > 0) {
       alert(cardName + ': ' + cardNumber);
+
+      // call history start
+      let time = new Date().toLocaleTimeString();
+      const newDiv = getId('new-div');
+      const createDiv = document.createElement('div');
+      createDiv.innerHTML = `
+        <div class="rounded-lg bg-[#fafafa] p-3 my-5 flex justify-between items-center ">
+            <div>
+                <h4 class="font-bold">${cardName}</h4>
+                <p>${cardNumber}</p>
+            </div>
+            <p>${time}</p>
+        </div>
+    `;
+      newDiv.appendChild(createDiv);
+      // call history end
+
+      coinIcon = coinIcon - 20;
+      getId('coin-icon').innerText = coinIcon;
+    } else {
+      alert(
+        "❌ You don't have enough coins. You need at least 20 coins to make a call."
+      );
+      getId('coin-icon').innerText = 0;
+      return;
     }
-    if (coinIcon < 20) {
-      alert('❌ আপনার পর্যাপ্ত কয়েন নেই। কল করতে কমপক্ষে ২০ কয়েন লাগবে।');
-    }
-    console.log(cardName, cardNumber, coinIcon);
   }
+});
+
+// clear btn
+document.getElementById('clear-btn').addEventListener('click', function () {
+  const newDivs = getId('new-div');
+  console.log(newDivs);
+  newDivs.innerHTML = ' ';
 });
