@@ -21,6 +21,21 @@ for (let heart of heartBtn) {
   });
 }
 
+// copy function
+const copyBtn = getClass('copy-btn');
+
+for (let copy of copyBtn) {
+  copy.addEventListener('click', function () {
+    let emNumber = copy.parentNode.parentNode.parentNode.children[3].innerText;
+    navigator.clipboard.writeText(emNumber);
+    alert('Copied text: ' + emNumber);
+    // copy count update
+    let copyCount = parseFloat(getId('copy-count').innerText);
+    copyCount = copyCount + 1;
+    getId('copy-count').innerText = copyCount;
+  });
+}
+
 // call function
 getId('card-box').addEventListener('click', function (e) {
   if (e.target.className.includes('call-bd')) {
@@ -63,6 +78,5 @@ getId('card-box').addEventListener('click', function (e) {
 // clear btn
 document.getElementById('clear-btn').addEventListener('click', function () {
   const newDivs = getId('new-div');
-  console.log(newDivs);
   newDivs.innerHTML = ' ';
 });
